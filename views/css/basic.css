@@ -1,0 +1,15 @@
+.btn-blue {
+    background-color: #4f73b8;
+    color: #fff;
+    border-color: rgba(0, 73, 72, 0.583);
+}
+
+.btn-blue:hover {
+    background-color: #4168b1;
+    color: lightgray;
+    cursor: pointer
+}
+
+body{
+    background-color: rgb(41, 43, 50);
+}

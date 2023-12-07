@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/70c8b72f77.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="images/favicon.ico" />
+  <link href="../css/basic.css" rel="stylesheet" type="text/css" />
+  <title>Tournaments</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500&display=swap");
+  </style>
+</head>
+
+<!-- **Auto formatting breaks embedded javascript** -->
+
+<body style="background-color: rgb(41, 43, 50);">
+  <% if(!ID) { %>
+    <%- include("_navigation_bar") %>
+<% } else if ( role === 0) {  %>
+    <%- include("_admin_navigation_bar") %>
+<% } else { %>
+    <%- include("_user_navigation_bar") %>
+<% } %>
+  <main class>
+    <section class="bg-dark text-light p-5 pt-lg-5 p-lg-5 text-center text-sm-start" style="background-image: url(../images/ssbbanner4.png); background-repeat: no-repeat; min-width: 100%; min-height: 100%; width: auto; height: auto; background-size: cover;">
+      <div class="container py-5">
+        <div class="d-sm-flex align-items-center justify-content-left">
+          <div class="container">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light text-light" style=" text-shadow : 10px 10px 20px black,  0 0 10px #167c9c;font-size: 50px;">
+                Join a tournament or create your own today.</h1>
+              <a href="/tournaments/new" class="btn btn-blue my-2 ">Create a
+                tournament</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-5" style="background-color: rgb(41, 43, 50);">
+      <div class="container min-vh-100">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <!-- Dynamically load our tournaments from Challonge -->
+          <% 
+            let j
+            if(!db){
+                j = tournaments.length
+            }else{
+                j = Object.keys(tournaments).length 
+            }
+            for (let i=0; i < j; i++) { 
+            const k=Math.floor(Math.random() * 20) +1 
+          %>
+          <div class="col">
+            <div class="card shadow-sm" style="border: none;">
+              <img src="../images/thumbnails/thumb<%= k %>.png" alt="Tournament Thumbnail" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+              <div class="card-body bg-dark">
+                <h5 class="card-title text-light text-center">
+                  <%
+                    let name
+                    if(!db){
+                        name = tournaments[i].tournament.name
+                    }else{
+                        name = tournaments[i].tournament_name
+                    }
+                  %>
+                  <%= name %>
+                </h5>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button id="tButton<%=i%>" type="button" class="btn btn-blue ">
+                      View
+                    </button>
+                  </div>
+                  <small class="text-muted">
+                    <%
+                        let start
+                        if(!db){
+                            start = tournaments[i].tournament.startAt
+                        }else{
+                            start = tournaments[i].tournament_start
+                        }
+                    %>
+                    <%= !start ? "Tentative" : new Date(start).toLocaleDateString() %>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Redirect buttons with tournament id parameter -->
+          <%
+            let id
+            if(!db){
+                id = tournaments[i].tournament.id
+            }else{
+                id = tournaments[i].tournament_id
+            }
+          %>
+          <script>
+            document.getElementById("tButton<%=i%>").onclick = () => {
+              window.location.href = "/tournaments/<%= id %>";
+            }
+          </script>
+          <% } %>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Copyright Footer -->
+  <footer class="pb-3 pt-4 bg-dark text-white text-center text-muted position-relative">
+    <div class="container">
+      <p>&copy; <span id="displayDate"></span> <a href="/" style="color: white;">TournaSmash</a></p>
+      <a href="#" class="position-absolute bottom-0 end-0 p-4 pt-5">
+        <i class="bi bi-arrow-up-circle h1"></i></a>
+    </div>
+  </footer>
+
+
+  <script type="text/javascript">
+    var newDate = new Date();
+    // Insert it via javascript
+    document.getElementById('displayDate').innerHTML = newDate.getFullYear();
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

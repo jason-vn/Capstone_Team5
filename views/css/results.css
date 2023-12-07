@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+    font-family: "Roboto", sans-serif;
+    color: white;
+}
+
+img.circle-img.circle-img--small {
+    height: 55px;
+    width: 55px;
+    border-radius: 55px;
+}
+
+.table {
+    border-spacing: 0 15px;
+    border-collapse: separate;
+}
+
+.table thead tr th,
+.table thead tr td,
+.table tbody tr th,
+.table tbody tr td {
+    vertical-align: middle;
+    border: none;
+}
+
+
+
+.main-content a:link {
+    text-decoration: none;
+    color: white;
+}
+
+.main-content a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content a:hover {
+    color: rgb(45, 100, 163);
+    background-color: transparent;
+    text-decoration: none;
+}

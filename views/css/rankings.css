@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.main-content {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.leaderboard-card {
+    background: rgb(47, 50, 55);
+    margin-bottom: 30px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-card.leaderboard-card--first {
+    transform: scale(1.15);
+}
+
+.leaderboard-card.leaderboard-card--first .leaderboard-card__top {
+    color: #fff;
+}
+
+.leaderboard-card__top {
+    background: rgb(47, 50, 55);
+    padding: 20px 0 30px 0;
+}
+
+.leaderboard-card__body {
+    padding: 15px;
+    margin-top: -40px;
+}
+
+img.circle-img {
+    height: 70px;
+    width: 70px;
+    border-radius: 70px;
+    border: 2px solid rgb(131, 131, 131);
+    background-color: rgb(45, 55, 67);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+img.circle-img.circle-img--small {
+    height: 55px;
+    width: 55px;
+    border-radius: 55px;
+}
+
+.table {
+    border-spacing: 0 15px;
+    border-collapse: separate;
+}
+
+.table thead tr th,
+.table thead tr td,
+.table tbody tr th,
+.table tbody tr td {
+    vertical-align: middle;
+    border: none;
+}
+
+.table thead tr th:nth-last-child(1),
+.table thead tr td:nth-last-child(1),
+.table tbody tr th:nth-last-child(1),
+.table tbody tr td:nth-last-child(1) {
+    text-align: center;
+}
+
+.table tbody tr {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.table tbody tr td {
+    background: rgb(33, 35, 38);
+}
+
+.table tbody tr td:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+}
+
+.table tbody tr td:nth-last-child(1) {
+    border-radius: 0 5px 5px 0;
+}
+
+.main-content a:link {
+    text-decoration: none;
+    color: white;
+}
+
+.main-content a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content a:hover {
+    color: rgb(45, 100, 163);
+    background-color: transparent;
+    text-decoration: none;
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/basic.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/70c8b72f77.js" crossorigin="anonymous"></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+  <link rel="icon" href="images/favicon.ico">
+  <title>TournaSmash</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500&display=swap");
+
+    #map {
+      margin-top: 50px;
+      max-width: 75%;
+      height: 75%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+
+<body style="background-color: rgb(41, 43, 50);">
+
+  <% if(!ID) { %>
+  <%- include("_navigation_bar") %>
+  <% } else { %>
+  <%- include("_user_navigation_bar") %>
+  <% } %>
+
+  <!-- Showcase -->
+  <section class="bg-dark text-light p-5 pt-lg-5 p-lg-5 text-center text-sm-start" style="background-image: url(images/ssbbanner4.png); background-repeat: no-repeat; min-width: 100%; min-height: 100%; background-size: cover;">
+    <div class="container">
+      <div class="d-sm-flex align-items-center justify-content-left">
+        <div>
+          <h1 class="fw-bold" style="text-shadow : 2px 3px black; font-size: 50px;">
+            <span class="fw-bolder">TournaSmash</span> Tournament Manager
+          </h1>
+          <p class="lead my-3" style="font-size: 25px; text-shadow : 3px 2px black;">Compete in or
+            create Super Smash Bros. Ultimate tournaments from your PC or mobile device!
+          </p>
+          <a href="/register"><button class="btn btn-blue btn-outline-dark btn-lg border-dark" data-bs-toggle="modal" data-bs-target="#register">Get
+              started</button></a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p style="page-break-after: always;">&nbsp;</p>
+  <p style="page-break-before: always;">&nbsp;</p>
+
+  <!-- Boxes -->
+  <section>
+    <div class="container px-4">
+      <div class="row gap-4 text-center">
+        <!-- Tournaments Container -->
+        <div class="col-lg-4 p-sm-1">
+          <div class="card bg-dark text-light h-100 py-5">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-controller"></i>
+              </div>
+              <h3 class="card-title mb-3" style="font-weight: bold;">Tournaments</h3>
+              <p class="card-text">Create or join a tournament!</p>
+              <a href="/tournaments" class="btn btn-light">Play</a>
+            </div>
+          </div>
+        </div>
+        <!-- Rankings Container -->
+        <div class="col-md p-sm-1">
+          <div class="card bg-dark text-light h-100 py-5">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-trophy"></i>
+              </div>
+              <h3 class="card-title mb-3" style="font-weight: bold;">Rankings</h3>
+              <p class="card-text">View season ranking leaderboards!</p>
+              <a href="/rankings" class="btn btn-light">View</a>
+            </div>
+          </div>
+        </div>
+        <!-- Users Container -->
+        <div class="col-md p-sm-1">
+          <div class="card bg-dark text-light h-100 py-5">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-people-fill"></i>
+              </div>
+              <h3 class="card-title mb-3" style="font-weight: bold;">Users</h3>
+              <p class="card-text">Search for users.</p>
+              <a href="/users" class="btn btn-light">Search</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p style="page-break-after: always;">&nbsp;</p>
+
+  <!-- FAQ Accordion -->
+  <section class="mb-5 py-5 pt-lg-5 p-lg-5 text-center" id="faq">
+    <div class="container px-4">
+      <div class="card bg-dark pt-3 pb-5 px-5">
+        <!-- Title -->
+        <h2 class="text-center text-light mb-4">Frequently Asked Questions</h2>
+
+        <!-- Accordion start -->
+        <div class="accordion" id="accordionPanelsStayOpen">
+          <!-- Question 1 -->
+          <div class="accordion-item bg-dark">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="accordion-button text-light" style="background-color: rgb(41, 43, 50);" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                Are controllers and gaming consoles provided for use at FSM Smash Tournaments?
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body text-start text-light" style="background-color: rgb(59, 60, 67);">
+                <span class="text-success" style="font-weight: bold;">Yes!</span> However, it is
+                <span class="text-light" style="font-weight: bold;">highly</span> encouraged to
+                bring controllers and/or consoles to prevent players from waiting to play their
+                matches.
+              </div>
+            </div>
+          </div>
+          <!-- Question 2 -->
+          <div class="accordion-item bg-dark">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+              <button class="accordion-button text-light collapsed" style="background-color: rgb(41, 43, 50);" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                Is there an entry fee to play at FSM Smash Tournaments?
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+              <div class="accordion-body text-light text-start" style="background-color: rgb(59, 60, 67);">
+                <span class="text-success" style="font-weight: bold;">No!</span> Participation is
+                free of charge.
+              </div>
+            </div>
+          </div>
+          <!-- Question 3 -->
+          <div class="accordion-item bg-dark">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button text-light collapsed" style="background-color: rgb(41, 43, 50);" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                Is there an age limit at FSM Smash Tournaments?
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body text-light text-start" style="background-color: rgb(59, 60, 67);">
+                <span class="text-success" style="font-weight: bold;">No!</span> All ages are
+                welcome.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion end -->
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Team Members -->
+  <section id="creators" class="pb-5 mb-5" style="background-color: rgb(41, 43, 50);">
+    <div class="container">
+      <h1 class="text-center text-light">
+        Development Team
+      </h1>
+      <div class="row justify-content-center px-4">
+
+        <div class="col-md-6 col-lg-3 col-sm-6 py-4">
+          <div class="card bg-dark bg-gradient shadow text-light h-100">
+            <div class="card-body text-center">
+              <img src="https://randomuser.me/api/portraits/men/92.jpg" class="rounded-circle mb-3" alt="">
+
+              <h3 class="card-title mb-2">Jason Nguyen</h3>
+              <h5 class="card-subtitle mb-2 text-white-50">Student</h5>
+              <hr class="mt-4 mb-2" />
+              <div class="card-body">
+                <p class="card-text"><strong>Information Technology</strong></p>
+                <p class="card-text">University of Arkansas - Fort Smith</p>
+              </div>
+              <hr class="mt-2 mb-3" />
+              <a href="#"><i class="bi bi-twitter text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-facebook text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-instagram text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-linkedin text-light mx-1"></i></a>
+              <a href="https://discord.gg/yKunzYNtay"><i class="bi bi-discord text-light mx-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 col-sm-6 py-4">
+          <div class="card bg-dark bg-gradient shadow text-light h-100">
+            <div class="card-body text-center">
+              <img src="https://randomuser.me/api/portraits/men/86.jpg" class="rounded-circle mb-3" alt="">
+
+              <h3 class="card-title mb-2">Michael Lopez</h3>
+              <h5 class="card-subtitle mb-2 text-white-50">Student</h5>
+              <hr class="mt-4 mb-2" />
+              <div class="card-body">
+                <p class="card-text"><strong>Information Technology</strong></p>
+                <p class="card-text">University of Arkansas - Fort Smith</p>
+              </div>
+              <hr class="mt-2 mb-3" />
+              <a href="#"><i class="bi bi-twitter text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-facebook text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-instagram text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-linkedin text-light mx-1"></i></a>
+              <a href="https://discord.gg/yKunzYNtay"><i class="bi bi-discord text-light mx-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 col-sm-6 py-4">
+          <div class="card bg-dark bg-gradient shadow text-light h-100">
+            <div class="card-body text-center">
+              <img src="https://randomuser.me/api/portraits/men/15.jpg" class="rounded-circle mb-3" alt="">
+
+              <h3 class="card-title mb-2">Martin Funmaker</h3>
+              <h5 class="card-subtitle mb-2 text-white-50">Student</h5>
+              <hr class="mt-4 mb-2" />
+              <div class="card-body">
+                <p class="card-text"><strong>Information Technology</strong></p>
+                <p class="card-text">University of Arkansas - Fort Smith</p>
+              </div>
+              <hr class="mt-2 mb-3" />
+              <a href="#"><i class="bi bi-twitter text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-facebook text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-instagram text-light mx-1"></i></a>
+              <a href="#"><i class="bi bi-linkedin text-light mx-1"></i></a>
+              <a href="https://discord.gg/yKunzYNtay"><i class="bi bi-discord text-light mx-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <p style="page-break-after: always;">&nbsp;</p>
+
+  <!-- Contact Info / Map -->
+
+  <section class="bg-gradient">
+    <div class="container">
+      <div class="row gap-5 g-4">
+        <div class="col-md p-sm-5">
+          <div class="card bg-dark shadow text-light h-100 align-items-center">
+            <div class="card-body text-center">
+
+              <h3 class="card-title my-2">Contact</h3>
+              <hr class="mt-4 mb-2" />
+
+              <div class="card-body">
+                <h5 class="card-text"><span class="fw-bold">University of Arkansas - Fort
+                    Smith<br>Computer Science
+                    Department</span>
+                </h5><br>
+                <p class="card-text">5210 Grand Ave. | P.O. Box 3649
+                  <br>Fort Smith, Arkansas 72913-3649
+                </p>
+
+                <span class="fw-bold"><a href="tel:1-479-788-7000">479-788-7000</a></span>
+              </div>
+
+              <a href="https://mobile.twitter.com/fsmsmash"><i class="bi bi-twitter text-light mx-1"></i></a>
+              <a href="https://facebook.com/fsmsmash/"><i class="bi bi-facebook text-light mx-1"></i></a>
+              <a href="https://gamedesign.cs.uafs.edu/"><i class="bi bi-instagram text-light mx-1"></i></a>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="col">
+          <div id='map'></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Copyright Footer -->
+  <footer class="pb-2 pt-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+      <p class="pb-1">&copy; <span id="displayDate"></span> <a href="/" style="color: white;">TournaSmash</a>
+      </p>
+      <a href="#" class="position-absolute bottom-0 end-0 p-4">
+        <i class="bi bi-arrow-up-circle h1"></i></a>
+    </div>
+  </footer>
+
+  <!-- Footer date JS -->
+  <script type="text/javascript">
+    var newDate = new Date();
+    // Insert it via javascript
+    document.getElementById('displayDate').innerHTML = newDate.getFullYear();
+  </script>
+
+  <!-- Mapbox API element -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+  <script>
+    // Mapbox config
+    mapboxgl.accessToken = 'pk.eyJ1IjoieWVldHNvbiIsImEiOiJja3pmZnQ2ZHQzaDQ3MnZyMTE1d3Y3eWhwIn0.AniwROuLTnoXsNg8M_is3A';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-94.3750352828712, 35.38130652249518],
+      zoom: 12
+    });
+    const marker = new mapboxgl.Marker()
+      .setLngLat([-94.3750352828712, 35.38130652249518])
+      .addTo(map);
+  </script>
+
+  <!-- Bootstrap JS file -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
